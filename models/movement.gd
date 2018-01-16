@@ -1,7 +1,8 @@
 extends Spatial
 
 # class member variables go here, for example:
-var speed = 0.2
+var throttle = 0.2
+var speed = throttle
 var lower_speed_limit = 0.1
 var upper_speed_limit = 0.7
 
@@ -32,4 +33,8 @@ func _process(delta):
 			speed = speed - 0.01
 		else:
 			pass
+	if get_node("Nose").is_colliding() or get_node("LWing").is_colliding() or get_node("RWing").is_colliding():
+		self.speed = 0
+		self.translate(Vector3(0, 0, -5))
+		self.speed = self.throttle / 2
 	self.translate(Vector3(0, 0, speed))
